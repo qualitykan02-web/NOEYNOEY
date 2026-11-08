@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MY WEIGHT LOSS JOURNEY | DASHBOARD</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#4b3a73;--mut:#8a7aa8;--ok:#3fcf8e;--bad:#ff6f9f;--rb:linear-gradient(90deg,#ffadc7,#ffc9a8,#fff0a0,#b8f0c8,#a8e6ff,#b9c4ff,#d9b8ff);--rbt:linear-gradient(90deg,#ff7aa8,#ffa66b,#f2c94c,#5fd68a,#4cc3ff,#8a8bff,#c07bff)}
+body{font-family:'Prompt','Noto Sans Thai',sans-serif;color:var(--ink);padding:18px;min-height:100vh;
+background:linear-gradient(180deg,#b9e3ff 0%,#d9eeff 28%,#ffe3f1 68%,#fff6fb 100%) fixed}
+.wrap{max-width:1280px;margin:auto}
+header{background:linear-gradient(135deg,#fff,#fff0f8 60%,#eef6ff);border:3px solid #fff;border-radius:36px;padding:32px 30px 22px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;box-shadow:0 14px 34px #d9a8ff66;position:relative;overflow:hidden}
+header:before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:var(--rb)}
+header h1{font-size:clamp(22px,3.2vw,36px);font-weight:700;background:var(--rbt);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+header p{color:var(--mut);margin-top:4px;font-size:15px}
+.art{display:flex;gap:8px}.art svg{width:74px;height:74px;filter:drop-shadow(0 6px 8px #0003)}
+.ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 4px;font-size:14px;color:var(--mut)}
+.pill{display:inline-flex;gap:8px;align-items:center;background:#fff;border-radius:99px;padding:7px 14px;box-shadow:0 3px 10px #d9a8ff44}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--ok);animation:pl 1.6s infinite}
+.dot.off{background:#ffe58a;animation:none}.dot.err{background:var(--bad);animation:none}
+@keyframes pl{50%{box-shadow:0 0 0 6px #12b88633}}
+button,select,a.btn{font:inherit;border:0;border-radius:99px;padding:7px 14px;background:linear-gradient(90deg,#ffc2dc,#d4c2ff);color:var(--ink);font-weight:500;cursor:pointer;text-decoration:none;display:inline-block}
+a.btn{background:linear-gradient(90deg,#b8f0c8,#a8e6ff);color:var(--ink)}
+select{background:#fff;color:var(--ink);box-shadow:0 3px 10px #d9a8ff44}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ff9ec7}
+.grid{display:grid;gap:16px}.kpis{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.two{grid-template-columns:repeat(auto-fit,minmax(340px,1fr));margin-top:16px}
+.card{background:#ffffffee;border:3px solid #fff;border-radius:30px;padding:20px;box-shadow:0 10px 26px #d9a8ff44;position:relative;overflow:hidden}
+.kpi{color:var(--ink);min-height:160px}.kpi h3{font-size:14px;font-weight:500;max-width:68%}
+.kpi .v{font-size:40px;font-weight:700;margin:6px 0 0}.kpi small{display:block;font-size:12.5px}
+.kpi svg.im{position:absolute;right:8px;top:8px;width:68px;height:68px;filter:drop-shadow(0 6px 6px #0003)}
+.k1{background:linear-gradient(135deg,#a8b8ff,#cfa8ff)}.k2{background:linear-gradient(135deg,#8fe0b0,#a8ecde)}
+.k3{background:linear-gradient(135deg,#ffbf8f,#ff9eb5)}.k4{background:linear-gradient(135deg,#ffe58a,#ffd1a8)}
+.k5{background:linear-gradient(135deg,#8fd8ff,#a8b8ff)}.k6{background:linear-gradient(135deg,#ff9ec7,#cfa8ff)}
+h2{font-size:17px;margin-bottom:12px}
+.jt{position:relative;height:26px;border-radius:99px;background:#f3ecff;margin:44px 6px 10px}
+.jt i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--rb);transition:width .8s}
+.jt b{position:absolute;top:-34px;transform:translateX(-50%);font-size:13px;white-space:nowrap}
+.jl{display:flex;justify-content:space-between;font-size:13px;color:var(--mut)}
+.bmi{display:flex;height:26px;border-radius:99px;overflow:hidden;margin:34px 0 8px;position:relative}
+.bmi span{height:100%}.bmi u{position:absolute;top:-30px;transform:translateX(-50%);text-decoration:none;font-size:13px;font-weight:700;white-space:nowrap}
+.lgd{display:flex;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--mut)}.lgd i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:5px;vertical-align:-1px}
+.mini{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:16px}
+.mini .card h2{display:flex;gap:8px;align-items:center}.mini .card h2 svg{width:30px;height:30px}
+.empty{color:var(--mut);font-size:14px;padding:18px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+.orig th,.orig td{border:1px solid #e5d9f5;padding:8px 10px;vertical-align:top}
+.orig th{text-align:center;color:var(--ink);white-space:nowrap}
+.orig td.n,.orig td.c{text-align:center}.orig tbody tr:nth-child(odd) td{background:#fffafd}
+.opts{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.opts input{font:inherit;padding:8px 14px;border-radius:99px;border:2px solid #eadcf8;flex:1 1 220px}
+.opts label{font-size:13px;color:var(--mut)}.opts select{margin-left:6px}
+.sc{overflow-x:auto}
+.fc p{margin:6px 0;font-size:15px}.fc b{font-size:20px}
+.wrap{position:relative;z-index:1}
+.fx{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.fx .cl{position:absolute;animation:dr linear infinite;opacity:.95;filter:drop-shadow(0 6px 10px #9ccfff55)}
+@keyframes dr{from{transform:translateX(-30vw)}to{transform:translateX(130vw)}}
+.fx .st{position:absolute;animation:tw 3.2s ease-in-out infinite}
+@keyframes tw{0%,100%{transform:scale(.6) rotate(0);opacity:.35}50%{transform:scale(1.25) rotate(25deg);opacity:1}}
+.fx .pt{position:absolute;top:-6vh;animation:fl linear infinite;opacity:.85}
+@keyframes fl{0%{transform:translate(0,-6vh) rotate(0)}50%{transform:translate(40px,55vh) rotate(180deg)}100%{transform:translate(-20px,112vh) rotate(360deg)}}
+.hf{position:absolute;opacity:.9;animation:sp 24s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.sp{position:absolute;font-style:normal;animation:tw 3s ease-in-out infinite;pointer-events:none}
+#garden{margin:26px -18px -18px;line-height:0;position:relative;z-index:1}
+#garden svg{width:100%;height:auto;display:block}
+@media(prefers-reduced-motion:reduce){.fx *,.hf,.sp{animation:none!important}}
+footer{margin:22px 4px;font-size:12.5px;color:var(--mut)}
+@media(prefers-reduced-motion:reduce){.dot,.jt i{animation:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="fx" id="fx" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="sb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9defa"/></linearGradient>
+<linearGradient id="rbw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff9eb5"/><stop offset=".2" stop-color="#ffe58a"/><stop offset=".4" stop-color="#8fe0b0"/><stop offset=".6" stop-color="#8fd8ff"/><stop offset=".8" stop-color="#a8b8ff"/><stop offset="1" stop-color="#cfa8ff"/></linearGradient>
+<radialGradient id="dial" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#dfe8f5"/></radialGradient>
+<radialGradient id="tp" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#fff3a8"/><stop offset=".6" stop-color="#ffd86b"/><stop offset="1" stop-color="#f0b24a"/></radialGradient>
+<linearGradient id="wt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c6f0ff"/><stop offset="1" stop-color="#8ab8ff"/></linearGradient>
+<linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset=".5" stop-color="#9aa6b2"/><stop offset="1" stop-color="#5d6a76"/></linearGradient>
+<symbol id="scale" viewBox="0 0 120 120"><rect x="10" y="14" width="100" height="94" rx="22" fill="url(#sb)" stroke="#d9c8f2" stroke-width="3"/><rect x="10" y="94" width="100" height="14" rx="7" fill="url(#rbw)"/><circle cx="60" cy="50" r="30" fill="url(#dial)" stroke="#8da0c4" stroke-width="3"/><path d="M36 50a24 24 0 0148 0" fill="none" stroke="url(#rbw)" stroke-width="6" stroke-linecap="round"/><path d="M60 50L74 32" stroke="#ff9eb5" stroke-width="4" stroke-linecap="round"/><circle cx="60" cy="50" r="5" fill="#4b3a73"/><path d="M30 24c8-6 20-8 30-8" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".8"/></symbol>
+<symbol id="tape" viewBox="0 0 120 120"><circle cx="48" cy="60" r="40" fill="url(#tp)"/><circle cx="48" cy="60" r="16" fill="#fff6c8" stroke="#f0b24a" stroke-width="3"/><circle cx="48" cy="60" r="5" fill="#f0b24a"/><path d="M60 98 L112 98 L112 80 L66 80Z" fill="#ffe55c" stroke="#f0b24a" stroke-width="2"/><g stroke="#4b3a73" stroke-width="2"><path d="M76 80v8M86 80v12M96 80v8M106 80v12"/></g><path d="M22 36c8-10 20-14 30-12" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".8"/></symbol>
+<symbol id="bottle" viewBox="0 0 120 120"><rect x="44" y="4" width="32" height="14" rx="5" fill="url(#rbw)"/><path d="M48 18h24l10 20v66a8 8 0 01-8 8H46a8 8 0 01-8-8V38z" fill="#eaf7ff" stroke="#9fc4e8" stroke-width="3"/><path d="M40 62h40v42a6 6 0 01-6 6H46a6 6 0 01-6-6z" fill="url(#wt)"/><path d="M40 62c10-6 20 6 40 0" fill="none" stroke="#fff" stroke-width="3" opacity=".7"/><path d="M48 30v60" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".7"/></symbol>
+<symbol id="dumb" viewBox="0 0 120 120"><rect x="30" y="54" width="60" height="12" rx="5" fill="url(#bar)"/><rect x="10" y="34" width="14" height="52" rx="6" fill="#ff9eb5"/><rect x="22" y="40" width="12" height="40" rx="5" fill="#ffbf8f"/><rect x="96" y="34" width="14" height="52" rx="6" fill="#cfa8ff"/><rect x="86" y="40" width="12" height="40" rx="5" fill="#a8b8ff"/><path d="M13 40v16M99 40v16" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/></symbol>
+<symbol id="fl" viewBox="-50 -50 100 100"><g fill="currentColor"><ellipse cx="0" cy="-27" rx="15" ry="23"/><ellipse cx="0" cy="-27" rx="15" ry="23" transform="rotate(72)"/><ellipse cx="0" cy="-27" rx="15" ry="23" transform="rotate(144)"/><ellipse cx="0" cy="-27" rx="15" ry="23" transform="rotate(216)"/><ellipse cx="0" cy="-27" rx="15" ry="23" transform="rotate(288)"/></g><g fill="#fff" opacity=".45"><ellipse cx="-4" cy="-32" rx="4" ry="9"/></g><circle r="13" fill="#ffe58a" stroke="#fff" stroke-width="3"/></symbol><symbol id="cloud" viewBox="0 0 200 100"><g fill="#fff"><circle cx="60" cy="62" r="30"/><circle cx="102" cy="44" r="38"/><circle cx="148" cy="60" r="32"/><rect x="36" y="60" width="150" height="34" rx="17"/></g></symbol></defs></svg>
+<div class="wrap">
+<header>
+ <svg class="hf" style="right:-26px;top:-26px;width:110px;height:110px;color:#ffc2dc" aria-hidden="true"><use href="#fl"/></svg><svg class="hf" style="right:70px;top:-34px;width:70px;height:70px;color:#d4c2ff;animation-direction:reverse" aria-hidden="true"><use href="#fl"/></svg><svg class="hf" style="left:-30px;bottom:-34px;width:100px;height:100px;color:#a8e6ff" aria-hidden="true"><use href="#fl"/></svg>
+ <i class="sp" style="left:46%;top:16px;font-size:22px" aria-hidden="true">✨</i><i class="sp" style="left:62%;bottom:12px;font-size:20px;animation-delay:1s" aria-hidden="true">💗</i><i class="sp" style="left:26px;top:10px;font-size:18px;animation-delay:2s" aria-hidden="true">⭐</i>
+ <div><h1 id="ttl">MY WEIGHT LOSS JOURNEY | DASHBOARD</h1> <span style="font-size:30px" aria-hidden="true">👑</span><p id="sub">บันทึกข้อมูลรายวัน • ติดตามแนวโน้มน้ำหนัก • ประเมินความก้าวหน้าสู่เป้าหมาย</p></div>
+ <div class="art"><svg><use href="#scale"/></svg><svg><use href="#tape"/></svg><svg><use href="#bottle"/></svg><svg><use href="#dumb"/></svg></div>
+</header>
+<div class="ctl">
+ <span class="pill"><span class="dot off" id="dot"></span><span id="stat">เชื่อมต่อ Google Sheet…</span></span>
+ <span class="pill">รีเฟรชถัดไปใน <b id="cd">–</b> วินาที</span>
+ <label class="pill">ดึงซ้ำทุก <select id="iv"><option value="30">30 วินาที</option><option value="45" selected>45 วินาที</option><option value="60">60 วินาที</option></select></label>
+ <button id="rf">ดึงข้อมูลตอนนี้</button>
+ <a class="btn" id="open" target="_blank" rel="noopener">บันทึก / แก้ไขข้อมูลใน Google Sheet</a>
+</div>
+<section class="grid kpis" id="kpis"></section>
+<section class="grid two">
+ <div class="card"><h2>เส้นทางสู่เป้าหมาย</h2><div id="jt"></div></div>
+ <div class="card"><h2>ดัชนีมวลกาย (BMI)</h2><div id="bmi"></div></div>
+</section>
+<section class="card" style="margin-top:16px"><h2>แนวโน้มน้ำหนัก (กก.)</h2><div id="wchart"></div></section>
+<section class="grid two">
+ <div class="card fc" id="fc"></div>
+ <div class="card"><h2>ข้อมูลตั้งต้น</h2><div id="info"></div></div>
+</section>
+<section class="grid mini" id="mini"></section>
+<section class="card" style="margin-top:16px">
+ <h2>บันทึกข้อมูลรายวัน</h2>
+ <div class="opts"><input id="q" placeholder="ค้นหามื้ออาหาร / การออกกำลังกาย / หมายเหตุ…" aria-label="ค้นหา">
+  <label>แสดง<select id="fp"><option value="">ทุกวันที่บันทึก</option><option value="w">เฉพาะวันที่มีน้ำหนัก</option><option value="ex">เฉพาะวันที่ออกกำลังกาย</option></select></label>
+  <label>เรียงลำดับ<select id="fo"><option value="new">ล่าสุดก่อน</option><option value="old">เก่าสุดก่อน</option></select></label>
+  <button id="fr" type="button">ล้างตัวเลือก</button></div>
+ <div class="sc"><table id="tb" class="orig"></table></div>
+ <p id="tnote" style="font-size:13px;color:var(--mut);margin-top:8px"></p>
+</section>
+<footer>แหล่งข้อมูล: Google Sheet “เนย ลด นน” (อ่านอัตโนมัติ กรอก/แก้ไขในชีตแล้วหน้านี้อัปเดตเองตามรอบ) · ต้องตั้งค่าการแชร์ชีตเป็น “ทุกคนที่มีลิงก์ ดูได้” · การบันทึกข้อมูลทำที่ Google Sheet · BMI ใช้เกณฑ์เอเชีย-แปซิฟิก (ข้อมูลเพื่อติดตามตนเอง ไม่ใช่การวินิจฉัยทางการแพทย์)</footer>
+</div>
+<div id="garden" aria-hidden="true"></div>
+<script>
+/* ===== ตั้งค่า ===== */
+const CFG={SHEET_ID:'1QCEE-cYXeoFJNAcJNeAU71I-bB5Y2UpeRR7tFN4e9Mk',SHEET_NAME:'Weight Dashboard',GID:'0',WATER_GOAL:2};
+const RB=['#ff9eb5','#ffbf8f','#ffe58a','#8fe0b0','#8fd8ff','#a8b8ff','#cfa8ff'];
+const MO=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const FB={title:'MY WEIGHT LOSS JOURNEY | DASHBOARD',sub:'บันทึกข้อมูลรายวัน • ติดตามแนวโน้มน้ำหนัก • ประเมินความก้าวหน้าสู่เป้าหมาย',level:'อ้วน',
+ inp:{h:159,s:102,c:91.5,g:70,start:'27 ก.ค. 2026',age:29,sex:'หญิง'},
+ logs:[{date:'08/11/69',w:91.5,waist:NaN,water:1.5,waterRaw:'1.5 L',ex:'',dur:NaN,cal:NaN,pro:NaN,meal:'ตำแตงผักบุ้ง / เนื้อย่าง/ข้าวต้ม',note:'',raw:{}}]};
+let D=FB,live=false,lastOk=null,busy=false,left=45;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const f=(v,d=1)=>Number.isFinite(v)?v.toLocaleString('th-TH',{minimumFractionDigits:d,maximumFractionDigits:d}):'–';
+const numIn=s=>{const m=String(s??'').replace(/,/g,'').match(/-?\d+(\.\d+)?/);return m?+m[0]:NaN};
+function pd(s){s=String(s||'').trim();let m=s.match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4})/),d,mo,y;
+ if(m){d=+m[1];mo=+m[2]-1;y=+m[3]}else{m=s.match(/(\d{1,2})\s+([ก-๙.]+)\s+(\d{2,4})/);if(!m)return NaN;d=+m[1];const k=m[2].replace(/\./g,'');mo=MO.findIndex(x=>x.replace(/\./g,'')===k);if(mo<0)return NaN;y=+m[3]}
+ y=y<100?1957+y:y>2400?y-543:y;return new Date(y,mo,d).getTime()}
+const sd=t=>{const d=new Date(t);return d.getDate()+' '+MO[d.getMonth()]+' '+String(d.getFullYear()+543).slice(2)};
+const sh=t=>{const d=new Date(t);return d.getDate()+'/'+(d.getMonth()+1)};
+function csv(t){const R=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];
+ if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}
+ else if(ch=='"')q=true;else if(ch==','){r.push(c);c=''}else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);R.push(r);r=[];c=''}else c+=ch}
+ if(c||r.length){r.push(c);R.push(r)}return R}
+function parse(rows){const C=rows.map(r=>r.map(x=>(x||'').trim())),d={title:'',sub:'',level:'',inp:{},logs:[]};
+ d.title=C.flat().find(x=>/WEIGHT LOSS/i.test(x))||'';d.sub=C.flat().find(x=>x.includes('•'))||'';
+ const after=(lb,isNum)=>{for(const r of C)for(let i=0;i<r.length;i++)if(r[i].startsWith(lb)){const v=r.slice(i+1).find(Boolean);if(v!=null&&(!isNum||/^-?[\d,.]+$/.test(v)))return isNum?+v.replace(/,/g,''):v}return isNum?NaN:''};
+ d.inp={h:after('ส่วนสูง',1),s:after('น้ำหนักเริ่มต้น',1),c:after('น้ำหนักปัจจุบัน',1),g:after('น้ำหนักเป้าหมาย',1),start:after('วันที่เริ่มต้น',0),age:after('อายุ',1),sex:after('เพศ',0)};
+ const ki=C.findIndex(r=>r.some(x=>x.startsWith('ความสำเร็จ')));if(ki>=0){const nx=C.slice(ki+1).find(r=>r.some(Boolean));if(nx){const nz=nx.filter(Boolean);d.level=nz[2]||''}}
+ const hi=C.findIndex(r=>r.includes('วันที่')&&r.some(x=>x.startsWith('น้ำหนัก')));if(hi<0)throw new Error('ไม่พบหัวตารางบันทึกรายวัน');
+ const K=[['date','วันที่'],['w','น้ำหนัก'],['waist','รอบเอว'],['water','น้ำดื่ม'],['ex','ออกกำลัง'],['dur','เวลา'],['cal','เผาผลาญ'],['pro','โปรตีน'],['meal','มื้อ'],['note','หมายเหตุ']],H={};
+ C[hi].forEach((x,i)=>{for(const[k,p]of K)if(!(k in H)&&(k==='date'?x==='วันที่':x.startsWith(p)))H[k]=i});
+ d.heads=C[hi].filter(Boolean);
+ for(const r of C.slice(hi+1)){const g=k=>H[k]!=null?r[H[k]]||'':'';if(!g('date')&&!g('w'))continue;
+  const o={date:g('date'),dt:pd(g('date')),w:numIn(g('w')),waist:numIn(g('waist')),water:numIn(g('water')),waterRaw:g('water'),ex:g('ex'),dur:numIn(g('dur')),cal:numIn(g('cal')),pro:numIn(g('pro')),meal:g('meal'),note:g('note')};
+  o.raw={date:g('date'),w:g('w'),waist:g('waist'),water:g('water'),ex:g('ex'),dur:g('dur'),cal:g('cal'),pro:g('pro'),meal:g('meal'),note:g('note')};d.logs.push(o)}
+ if(!Number.isFinite(d.inp.s))throw new Error('ไม่พบข้อมูลตั้งต้น');return d}
+function jsonp(url){return new Promise((ok,no)=>{const n='g'+Date.now(),s=document.createElement('script');
+ window[n]=j=>{delete window[n];s.remove();ok(j)};s.onerror=()=>{s.remove();no(new Error('JSONP ล้มเหลว'))};s.src=url+'&tqx=responseHandler:'+n;document.head.appendChild(s)})}
+async function load(){
+ const id=CFG.SHEET_ID,shn='sheet='+encodeURIComponent(CFG.SHEET_NAME),ts='&_='+Date.now(),base=`https://docs.google.com/spreadsheets/d/${id}/gviz/tq`;
+ const tries=[
+  async()=>{const r=await fetch(`https://docs.google.com/spreadsheets/d/${id}/export?format=csv&gid=${CFG.GID}${ts}`,{cache:'no-store'});if(!r.ok)throw 0;return parse(csv(await r.text()))},
+  async()=>{const r=await fetch(`${base}?tqx=out:csv&headers=0&${shn}${ts}`,{cache:'no-store'});if(!r.ok)throw 0;return parse(csv(await r.text()))},
+  async()=>{const j=await jsonp(`${base}?headers=0&${shn}${ts}`);return parse(j.table.rows.map(r=>(r.c||[]).map(x=>x?String(x.f??x.v??''):'')))}];
+ let err;for(const t of tries){try{return await t()}catch(e){err=e}}throw err||new Error('โหลดไม่ได้')}
+async function refresh(){if(busy)return;busy=true;$('dot').className='dot off';$('stat').textContent='กำลังดึงข้อมูล…';
+ try{D=await load();live=true;lastOk=new Date();$('dot').className='dot';$('stat').textContent='เชื่อมต่อสด · อัปเดต '+lastOk.toLocaleTimeString('th-TH')}
+ catch(e){live=false;$('dot').className='dot err';$('stat').textContent='เชื่อมต่อไม่ได้'+(lastOk?' · แสดงข้อมูลล่าสุด '+lastOk.toLocaleTimeString('th-TH'):' · แสดงข้อมูลสำรอง')}
+ busy=false;left=+$('iv').value;render()}
+const cat=b=>b<18.5?['น้ำหนักน้อย','#8fd8ff']:b<23?['ปกติ','#8fe0b0']:b<25?['น้ำหนักเกิน (ท้วม)','#ffe58a']:b<30?['อ้วนระดับ 1','#ffbf8f']:['อ้วนระดับ 2','#ff9eb5'];
+function render(){const I=D.inp,L=[...D.logs].filter(x=>Number.isFinite(x.w)).sort((a,b)=>(a.dt||0)-(b.dt||0));
+ $('ttl').textContent=D.title||'MY WEIGHT LOSS JOURNEY | DASHBOARD';$('sub').textContent=(D.sub||'')+(live?'':' · (ข้อมูลสำรอง)');
+ $('open').href='https://docs.google.com/spreadsheets/d/'+CFG.SHEET_ID+'/edit';
+ const S=I.s,G=I.g,cur=L.length?L[L.length-1].w:I.c,lost=S-cur,rem=cur-G,pct=Math.max(0,Math.min(100,lost/(S-G)*100)),bmi=cur/Math.pow(I.h/100,2),[bc,bcol]=cat(bmi);
+ const t0=pd(I.start),now=Date.now(),days=Number.isFinite(t0)?Math.max(0,Math.floor((now-t0)/864e5)):NaN,rate=days>=7&&lost>0?lost/(days/7):NaN;
+ const K=(c,h,v,s1,s2,i)=>`<div class="card kpi ${c}"><svg class="im"><use href="#${i}"/></svg><h3>${h}</h3><div class="v">${v}</div><small>${s1}</small><small>${s2}</small></div>`;
+ $('kpis').innerHTML=K('k1','น้ำหนักปัจจุบัน (กก.)',f(cur),'เริ่มต้น '+f(S)+' กก.',L.length?'ล่าสุด '+esc(L[L.length-1].date):'จากข้อมูลตั้งต้น','scale')+
+  K('k2','ลดลงทั้งหมด (กก.)',f(lost,2),'เฉลี่ย '+(Number.isFinite(rate)?f(rate,2)+' กก./สัปดาห์':'– (ต้องมีข้อมูล ≥ 7 วัน)'),'ระยะเวลา '+(Number.isFinite(days)?days+' วัน':'–'),'dumb')+
+  K('k3','เหลือถึงเป้าหมาย (กก.)',f(rem,2),'เป้าหมาย '+f(G)+' กก.','','tape')+
+  K('k4','ความสำเร็จ (%)',f(pct,2)+'%','ลดแล้ว '+f(lost,2)+' จาก '+f(S-G,1)+' กก.','','scale')+
+  K('k5','BMI ปัจจุบัน',f(bmi,2),bc,D.level?'ตามชีต: '+esc(D.level):'','tape')+
+  K('k6','บันทึกแล้ว (วัน)',D.logs.length,'น้ำดื่มเฉลี่ย '+(()=>{const w=D.logs.filter(x=>Number.isFinite(x.water));return w.length?f(w.reduce((a,x)=>a+x.water,0)/w.length,1)+' ลิตร/วัน':'–'})(),'','bottle');
+ /* journey */
+ $('jt').innerHTML=`<div class="jt"><i style="width:${pct}%"></i><b style="left:${Math.min(Math.max(pct,6),94)}%">⚖ ${f(cur)} กก. (${f(pct,1)}%)</b></div><div class="jl"><span>เริ่มต้น ${f(S)} กก.<br>${Number.isFinite(t0)?sd(t0):esc(I.start)}</span><span style="text-align:right">เป้าหมาย ${f(G)} กก. 🏁<br>เหลืออีก ${f(rem,1)} กก.</span></div>`;
+ /* bmi */
+ const seg=[[15,18.5,'#8fd8ff'],[18.5,23,'#8fe0b0'],[23,25,'#ffe58a'],[25,30,'#ffbf8f'],[30,40,'#ff9eb5']],mn=15,mx=40,pos=Math.min(Math.max((bmi-mn)/(mx-mn)*100,1),99);
+ $('bmi').innerHTML=`<div class="bmi">${seg.map(([a,b,c])=>`<span style="width:${(b-a)/(mx-mn)*100}%;background:${c}"></span>`).join('')}<u style="left:${pos}%">▼ ${f(bmi,1)}</u></div><div class="lgd">${[['< 18.5 น้ำหนักน้อย','#8fd8ff'],['18.5–22.9 ปกติ','#8fe0b0'],['23–24.9 ท้วม','#ffe58a'],['25–29.9 อ้วนระดับ 1','#ffbf8f'],['≥ 30 อ้วนระดับ 2','#ff9eb5']].map(([t,c])=>`<span><i style="background:${c}"></i>${t}</span>`).join('')}</div><p style="margin-top:12px;font-size:15px">ตอนนี้: <b style="background:${bcol};border-radius:99px;padding:2px 14px">${bc}</b> · น้ำหนักที่ BMI 22.9 ≈ ${f(22.9*Math.pow(I.h/100,2),1)} กก.</p>`;
+ /* weight chart */
+ const P=[];if(Number.isFinite(t0))P.push({t:t0,w:S,l:'เริ่มต้น'});L.forEach(x=>{if(Number.isFinite(x.dt))P.push({t:x.dt,w:x.w,l:x.date})});
+ if(P.length<2){$('wchart').innerHTML='<p class="empty">ยังมีจุดข้อมูลไม่พอสำหรับกราฟ — กรอกน้ำหนักรายวันในชีตได้เลย</p>'}
+ else{const X0=60,X1=680,Y0=20,Y1=250,tmin=P[0].t,tmax=Math.max(P[P.length-1].t,tmin+864e5),ymin=Math.floor((Math.min(G,...P.map(p=>p.w))-3)/5)*5,ymax=Math.ceil((Math.max(S,...P.map(p=>p.w))+3)/5)*5;
+  const x=t=>X0+(t-tmin)/(tmax-tmin)*(X1-X0),y=w=>Y1-(w-ymin)/(ymax-ymin)*(Y1-Y0),pts=P.map(p=>x(p.t)+','+y(p.w)).join(' ');
+  let g='';for(let v=ymin;v<=ymax;v+=5)g+=`<line x1="${X0}" x2="${X1}" y1="${y(v)}" y2="${y(v)}" stroke="#f0e6fa"/><text x="${X0-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#8a7aa8">${v}</text>`;
+  $('wchart').innerHTML=`<svg viewBox="0 0 700 300" width="100%" role="img" aria-label="กราฟน้ำหนัก"><defs><linearGradient id="lg" gradientUnits="userSpaceOnUse" x1="${X0}" x2="${X1}" y1="0" y2="0"><stop offset="0" stop-color="#ff7aa8"/><stop offset=".25" stop-color="#ffb36b"/><stop offset=".5" stop-color="#6fdc9a"/><stop offset=".75" stop-color="#7aa2ff"/><stop offset="1" stop-color="#b987ff"/></linearGradient><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b49bff" stop-opacity=".3"/><stop offset="1" stop-color="#a8b8ff" stop-opacity="0"/></linearGradient></defs>${g}
+  <polygon points="${x(tmin)},${Y1} ${pts} ${x(P[P.length-1].t)},${Y1}" fill="url(#ar)"/><line x1="${X0}" x2="${X1}" y1="${y(G)}" y2="${y(G)}" stroke="#6fdc9a" stroke-width="2.5" stroke-dasharray="7 5"/><text x="${X1}" y="${y(G)-6}" text-anchor="end" font-size="12" font-weight="700" fill="#3a9d78">เป้าหมาย ${f(G,0)} กก.</text>
+  <polyline points="${pts}" fill="none" stroke="url(#lg)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>${P.map((p,i)=>`<circle cx="${x(p.t)}" cy="${y(p.w)}" r="6" fill="#fff" stroke="${RB[i%7]}" stroke-width="4"/>${(P.length<=14||i===0||i===P.length-1)?`<text x="${x(p.t)}" y="${y(p.w)-12}" text-anchor="middle" font-size="12" font-weight="700" fill="#4b3a73">${f(p.w)}</text>`:''}`).join('')}
+  <text x="${X0}" y="278" font-size="11" fill="#8a7aa8">${sd(tmin)}</text><text x="${X1}" y="278" text-anchor="end" font-size="11" fill="#8a7aa8">${sd(tmax)}</text></svg>`}
+ /* forecast */
+ const eta=Number.isFinite(rate)&&rate>0?now+rem/rate*7*864e5:NaN;
+ $('fc').innerHTML=`<h2>คาดการณ์ถึงเป้าหมาย</h2>`+(Number.isFinite(eta)?`<p>อัตราลดเฉลี่ย <b>${f(rate,2)}</b> กก./สัปดาห์</p><p>หากคงอัตรานี้ ต้องใช้อีกราว <b>${Math.ceil(rem/rate)}</b> สัปดาห์</p><p>คาดว่าถึงเป้าหมายประมาณ <b>${sd(eta)}</b></p><p style="font-size:12.5px;color:#8a7aa8">เป็นการประมาณเชิงเส้นจากข้อมูลที่บันทึก ไม่ใช่คำแนะนำทางการแพทย์</p>`:'<p style="color:#8a7aa8">ยังคาดการณ์ไม่ได้ — ต้องมีวันที่เริ่มต้นและผ่านไปอย่างน้อย 7 วัน พร้อมน้ำหนักที่ลดลง</p>');
+ $('info').innerHTML=`<div class="lgd" style="font-size:14px;color:#4b3a73;gap:10px 22px">${[['ส่วนสูง',f(I.h,0)+' ซม.'],['น้ำหนักเริ่มต้น',f(S)+' กก.'],['น้ำหนักเป้าหมาย',f(G)+' กก.'],['วันที่เริ่มต้น',Number.isFinite(t0)?sd(t0):esc(I.start)],['อายุ',f(I.age,0)+' ปี'],['เพศ',esc(I.sex)||'–']].map(([a,b])=>`<span><b>${a}:</b> ${b}</span>`).join('')}</div>`;
+ /* mini charts */
+ const M=[['รอบเอว (ซม.)','waist','#ff9ec7','tape',0],['น้ำดื่ม (ลิตร)','water','#8fd8ff','bottle',CFG.WATER_GOAL],['เวลาออกกำลังกาย (นาที)','dur','#8fe0b0','dumb',0],['เผาผลาญ (แคลอรี่)','cal','#ffbf8f','dumb',0],['โปรตีน (กรัม)','pro','#cfa8ff','scale',0]];
+ $('mini').innerHTML=M.map(([t,k,c,i,goal])=>{const A=[...D.logs].filter(x=>Number.isFinite(x[k])&&Number.isFinite(x.dt)).sort((a,b)=>a.dt-b.dt).slice(-14);
+  let b;if(!A.length)b='<p class="empty">ยังไม่มีข้อมูล — กรอกในชีตได้เลย</p>';else{const mx=Math.max(...A.map(x=>x[k]),goal)*1.25||1,w=Math.min(46,260/A.length-6);
+   b=`<svg viewBox="0 0 300 160" width="100%"><line x1="10" x2="290" y1="130" y2="130" stroke="#f0e6fa"/>${goal?`<line x1="10" x2="290" y1="${130-goal/mx*100}" y2="${130-goal/mx*100}" stroke="#4b3a73" stroke-dasharray="5 4"/><text x="290" y="${124-goal/mx*100}" text-anchor="end" font-size="10" fill="#4b3a73">เป้า ${goal}</text>`:''}${A.map((x,j)=>{const h=x[k]/mx*100,cx=150+(j-(A.length-1)/2)*(w+6);return `<rect x="${cx-w/2}" y="${130-h}" width="${w}" height="${h}" rx="6" fill="${c}"/><text x="${cx}" y="${124-h}" text-anchor="middle" font-size="10" font-weight="700" fill="#4b3a73">${f(x[k],k==='cal'||k==='dur'||k==='pro'?0:1)}</text><text x="${cx}" y="146" text-anchor="middle" font-size="9" fill="#8a7aa8">${sh(x.dt)}</text>`}).join('')}</svg>`}
+  return `<div class="card"><h2><svg><use href="#${i}"/></svg>${t}</h2>${b}</div>`}).join('');
+ drawTable()}
+function drawTable(){const k=$('q').value.trim().toLowerCase(),fp=$('fp').value,fo=$('fo').value;
+ let L=D.logs.filter(x=>(!k||[x.raw.meal,x.raw.ex,x.raw.note].join(' ').toLowerCase().includes(k))&&(!fp||(fp==='w'?Number.isFinite(x.w):!!x.ex)));
+ L=[...L].sort((a,b)=>fo==='old'?(a.dt||0)-(b.dt||0):(b.dt||0)-(a.dt||0));
+ const cl=['#ff9eb5','#ffbf8f','#ffe3a0','#8fe0b0','#a8ecde','#8fd8ff','#a8b8ff','#c9b8ff','#cfa8ff','#f5b8ff'],H=['วันที่','น้ำหนัก (กก.)','รอบเอว (ซม.)','น้ำดื่ม (ลิตร)','ออกกำลัง / ก้าวเดิน','เวลา (นาที)','เผาผลาญ (แคลอรี่)','โปรตีน (กรัม)','มื้ออาหาร','หมายเหตุ'],K=['date','w','waist','water','ex','dur','cal','pro','meal','note'];
+ $('tb').innerHTML=`<thead><tr>${H.map((x,i)=>`<th style="background:${cl[i]}">${x}</th>`).join('')}</tr></thead><tbody>`+L.map(x=>`<tr>${K.map((c,i)=>`<td class="${i<8&&i!==4?'n':''}">${esc(x.raw[c]||'')}</td>`).join('')}</tr>`).join('')+(L.length?'':'<tr><td colspan="10" class="c">ไม่พบข้อมูลตามตัวเลือกที่เลือก</td></tr>')+'</tbody>';
+ $('tnote').textContent='แสดง '+L.length+' จาก '+D.logs.length+' วัน'}
+if(!FB.logs[0].raw.date)FB.logs[0].raw={date:'08/11/69',w:'91.5',waist:'',water:'1.5 L',ex:'',dur:'',cal:'',pro:'',meal:'ตำแตงผักบุ้ง / เนื้อย่าง/ข้าวต้ม',note:''},FB.logs[0].dt=pd('08/11/69');
+['q','fp','fo'].forEach(i=>$(i).addEventListener(i==='q'?'input':'change',drawTable));
+$('fr').onclick=()=>{$('q').value='';$('fp').value='';$('fo').value='new';drawTable()};
+$('rf').onclick=refresh;$('iv').onchange=()=>{left=+$('iv').value};
+setInterval(()=>{if(document.hidden)return;left--;$('cd').textContent=Math.max(left,0);if(left<=0)refresh()},1000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&lastOk&&(Date.now()-lastOk)>+$('iv').value*1000)refresh()});
+/* ===== ฉากท้องฟ้า เมฆ ดอกไม้ ประกาย ===== */
+(function(){const rnd=(a,b)=>a+Math.random()*(b-a),P=['#ffc2dc','#d4c2ff','#a8e6ff','#fff0a0','#b8f0c8','#ffd1a8'];let h='';
+ for(let i=0;i<6;i++)h+=`<svg class="cl" style="top:${rnd(2,48)}%;left:${rnd(-5,80)}%;width:${rnd(150,300)}px;height:${rnd(75,150)}px;animation-duration:${rnd(90,170)}s;animation-delay:-${rnd(0,120)}s"><use href="#cloud"/></svg>`;
+ for(let i=0;i<30;i++)h+=`<span class="st" style="left:${rnd(0,98)}%;top:${rnd(0,95)}%;font-size:${rnd(10,22)}px;color:${P[i%6]};animation-delay:-${rnd(0,3)}s;animation-duration:${rnd(2.4,4.6)}s">✦</span>`;
+ for(let i=0;i<9;i++)h+=`<span class="pt" style="left:${rnd(0,96)}%;font-size:${rnd(16,26)}px;animation-duration:${rnd(16,30)}s;animation-delay:-${rnd(0,25)}s">${['🌸','🌷','🩷'][i%3]}</span>`;
+ document.getElementById('fx').innerHTML=h;
+ const C=['#ffb3d1','#d4c2ff','#a8e6ff','#ffe58a','#ffc2a8','#c6f0d2','#ffd1e8'];let g='<svg viewBox="0 0 1200 150" preserveAspectRatio="xMidYMax slice"><rect y="128" width="1200" height="22" fill="#bff0cf"/><path d="M0 130 Q150 112 300 130 T600 130 T900 130 T1200 130 V150 H0Z" fill="#a8e8bf"/>';
+ for(let i=0;i<30;i++){const x=20+i*40+rnd(-10,10),y=rnd(52,100),sz=rnd(34,60),c=C[i%7];
+  g+=`<path d="M${x} 140 Q${x+rnd(-12,12)} ${(y+140)/2} ${x} ${y+sz*.35}" stroke="#7fd6a0" stroke-width="3.5" fill="none"/><ellipse cx="${x+10}" cy="${(y+150)/2}" rx="11" ry="5" fill="#8fe0b0" transform="rotate(-25 ${x+10} ${(y+150)/2})"/><use href="#fl" x="${x-sz/2}" y="${y-sz/2}" width="${sz}" height="${sz}" style="color:${c}"/>`}
+ document.getElementById('garden').innerHTML=g+'</svg>'})();
+render();refresh();
+</script>
+</body>
+</html>
